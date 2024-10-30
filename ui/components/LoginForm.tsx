@@ -9,36 +9,13 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch('/api/auth', {
-          method: 'GET',
-          credentials: 'include',
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.isAuthenticated) {
-            router.push('/');
-            router.refresh();
-          }
-        }
-      } catch (error) {
-        console.error('Auth check failed:', error);
-      }
-    };
-
-    checkAuth();
-  }, [router]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
     try {
-      const response = await fetch('/api/auth', {
+      const response = await fetch('/perplexica/api/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +26,7 @@ export default function LoginForm() {
       const data = await response.json();
 
       if (data.success) {
-        router.push('/');
+        router.push('/perplexica');
         router.refresh();
       } else {
         setError(data.message || '인증에 실패했습니다.');
@@ -60,6 +37,29 @@ export default function LoginForm() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/perplexica/api/auth', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.isAuthenticated) {
+            router.push('/perplexica');
+            router.refresh();
+          }
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+      }
+    };
+
+    checkAuth();
+  }, [router]);
 
   return (
     <form onSubmit={handleSubmit} className="p-6 bg-white rounded shadow-md">
