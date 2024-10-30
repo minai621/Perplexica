@@ -1,6 +1,6 @@
+import toml from '@iarna/toml';
 import fs from 'fs';
 import path from 'path';
-import toml from '@iarna/toml';
 
 const configFileName = 'config.toml';
 
