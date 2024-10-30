@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { BookOpenText, Home, Search, SquarePen, Settings } from 'lucide-react';
+import { BookOpenText, Home, Search, Settings, SquarePen } from 'lucide-react';
 import Link from 'next/link';
 import { useSelectedLayoutSegments } from 'next/navigation';
 import React, { useState, type ReactNode } from 'react';
@@ -44,7 +44,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
     <div>
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-20 lg:flex-col">
         <div className="flex grow flex-col items-center justify-between gap-y-5 overflow-y-auto bg-light-secondary dark:bg-dark-secondary px-2 py-8">
-          <a href="/">
+          <a href="/perplexica">
             <SquarePen className="cursor-pointer" />
           </a>
           <VerticalIconContainer>

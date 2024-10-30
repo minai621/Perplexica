@@ -28,7 +28,7 @@ export function middleware(request: NextRequest) {
   if (isPublicPath(pathname)) {
     // 이미 인증된 사용자가 /login에 접근할 경우 홈으로 리다이렉트
     if (pathname === '/login' && authCookie?.value === 'true') {
-      return NextResponse.redirect(new URL('/', request.url));
+      return NextResponse.redirect(new URL('/perplexica', request.url));
     }
     return NextResponse.next();
   }
@@ -40,7 +40,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     // 일반 페이지 요청의 경우 로그인 페이지로 리다이렉트
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/perplexica/login', request.url));
   }
 
   return NextResponse.next();
