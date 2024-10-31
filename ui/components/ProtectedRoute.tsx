@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ProtectedRoute({
@@ -9,6 +9,7 @@ export default function ProtectedRoute({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname(); // 현재 경로 감지
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -24,7 +25,7 @@ export default function ProtectedRoute({
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, pathname]); // pathname이 변경될 때마다 인증 체크
 
   return <>{children}</>;
 }
