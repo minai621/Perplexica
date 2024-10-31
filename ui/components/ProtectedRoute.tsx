@@ -15,7 +15,9 @@ export default function ProtectedRoute({
     const checkAuth = async () => {
       try {
         const response = await fetch('/perplexica/api/auth/check');
-        if (!response.ok) {
+        const data = await response.json();
+        // {"isAuthenticated":false}이면 로그인 페이지로 이동
+        if (!data.isAuthenticated) {
           router.push('/login');
         }
       } catch (error) {
