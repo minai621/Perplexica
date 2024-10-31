@@ -60,9 +60,6 @@ interface SettingsType {
   embeddingModelProviders: {
     [key: string]: [Record<string, any>];
   };
-  openaiApiKey: string;
-  groqApiKey: string;
-  anthropicApiKey: string;
   ollamaApiUrl: string;
 }
 
@@ -89,8 +86,6 @@ const SettingsDialog = ({
   const [selectedEmbeddingModel, setSelectedEmbeddingModel] = useState<
     string | null
   >(null);
-  const [customOpenAIApiKey, setCustomOpenAIApiKey] = useState<string>('');
-  const [customOpenAIBaseURL, setCustomOpenAIBaseURL] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -146,8 +141,6 @@ const SettingsDialog = ({
         setSelectedChatModel(chatModel);
         setSelectedEmbeddingModelProvider(embeddingModelProvider);
         setSelectedEmbeddingModel(embeddingModel);
-        setCustomOpenAIApiKey(localStorage.getItem('openAIApiKey') || '');
-        setCustomOpenAIBaseURL(localStorage.getItem('openAIBaseURL') || '');
         setChatModels(data.chatModelProviders || {});
         setEmbeddingModels(data.embeddingModelProviders || {});
         setIsLoading(false);
@@ -177,8 +170,6 @@ const SettingsDialog = ({
         selectedEmbeddingModelProvider!,
       );
       localStorage.setItem('embeddingModel', selectedEmbeddingModel!);
-      localStorage.setItem('openAIApiKey', customOpenAIApiKey!);
-      localStorage.setItem('openAIBaseURL', customOpenAIBaseURL!);
     } catch (err) {
       console.log(err);
     } finally {
@@ -317,32 +308,6 @@ const SettingsDialog = ({
                               }
                             />
                           </div>
-                          <div className="flex flex-col space-y-1">
-                            <p className="text-black/70 dark:text-white/70 text-sm">
-                              Custom OpenAI API Key
-                            </p>
-                            <Input
-                              type="text"
-                              placeholder="Custom OpenAI API Key"
-                              defaultValue={customOpenAIApiKey!}
-                              onChange={(e) =>
-                                setCustomOpenAIApiKey(e.target.value)
-                              }
-                            />
-                          </div>
-                          <div className="flex flex-col space-y-1">
-                            <p className="text-black/70 dark:text-white/70 text-sm">
-                              Custom OpenAI Base URL
-                            </p>
-                            <Input
-                              type="text"
-                              placeholder="Custom OpenAI Base URL"
-                              defaultValue={customOpenAIBaseURL!}
-                              onChange={(e) =>
-                                setCustomOpenAIBaseURL(e.target.value)
-                              }
-                            />
-                          </div>
                         </>
                       )}
                     {/* Embedding models */}
@@ -412,70 +377,6 @@ const SettingsDialog = ({
                         />
                       </div>
                     )}
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-black/70 dark:text-white/70 text-sm">
-                        OpenAI API Key
-                      </p>
-                      <Input
-                        type="text"
-                        placeholder="OpenAI API Key"
-                        defaultValue={config.openaiApiKey}
-                        onChange={(e) =>
-                          setConfig({
-                            ...config,
-                            openaiApiKey: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-black/70 dark:text-white/70 text-sm">
-                        Ollama API URL
-                      </p>
-                      <Input
-                        type="text"
-                        placeholder="Ollama API URL"
-                        defaultValue={config.ollamaApiUrl}
-                        onChange={(e) =>
-                          setConfig({
-                            ...config,
-                            ollamaApiUrl: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-black/70 dark:text-white/70 text-sm">
-                        GROQ API Key
-                      </p>
-                      <Input
-                        type="text"
-                        placeholder="GROQ API Key"
-                        defaultValue={config.groqApiKey}
-                        onChange={(e) =>
-                          setConfig({
-                            ...config,
-                            groqApiKey: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-black/70 dark:text-white/70 text-sm">
-                        Anthropic API Key
-                      </p>
-                      <Input
-                        type="text"
-                        placeholder="Anthropic API key"
-                        defaultValue={config.anthropicApiKey}
-                        onChange={(e) =>
-                          setConfig({
-                            ...config,
-                            anthropicApiKey: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
                   </div>
                 )}
                 {isLoading && (
