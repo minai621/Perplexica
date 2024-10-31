@@ -3,11 +3,11 @@ FROM node:alpine
 # 빌드 시 환경 변수 설정
 ARG NEXT_PUBLIC_WS_URL=wss://mj-dev.site/perplexica/ws
 ARG NEXT_PUBLIC_API_URL=https://mj-dev.site/perplexica/express-api
+ARG PASSWORD=${PASSWORD}
 
 # 런타임 환경 변수 설정
 ENV NEXT_PUBLIC_WS_URL=${NEXT_PUBLIC_WS_URL}
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-ENV PASSWORD=${PASSWORD}
 
 WORKDIR /home/perplexica
 
