@@ -13,7 +13,7 @@ export default function ProtectedRoute({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('/api/auth/check');
+        const response = await fetch('/perplexica/api/auth/check');
         if (!response.ok) {
           router.push('/login');
         }
