@@ -34,7 +34,7 @@ services:
       context: .
       dockerfile: app.dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=https://mj-dev.site/perplexica/api
+        - NEXT_PUBLIC_API_URL=https://mj-dev.site/perplexica/express-api
         - NEXT_PUBLIC_WS_URL=wss://mj-dev.site/perplexica/ws
     image: itzcrazykns1337/perplexica-frontend:main
     depends_on:
